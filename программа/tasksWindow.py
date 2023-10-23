@@ -1,4 +1,4 @@
-from PyQt6 import QtCore, QtGui, QtWidgets
+from PyQt5 import QtCore, QtGui, QtWidgets
 import sys
 from taskModule.taskComplete import TaskCompleteWidget
 from taskModule.taskPublishedWidget import TaskPublishedWidget
@@ -116,8 +116,17 @@ class TasksWindow(QtWidgets.QWidget):
         self.notComplete_page.setLayout(vbox)
 
     def appendTask_btn_clicked(self):
-        self.appendTaskWindow = AppendTaskWindow(self.db, self.guarantor)
+        self.appendTaskWindow = AppendTaskWindow(self.db, self.guarantor, self.lastTask)
         self.appendTaskWindow.show()
+    
+    def lastTask(self):
+        l = self.notComplete_page.layout()
+        l.addWidget(TaskPublishedWidget(1, self.db, self.db.getLastTask()[0]))
+    
+    def lastTaskComplete(self):
+        l = self.complete_page.layout()
+        TaskCompleteWidget(1, self.db)
+        #l.addWidget(TaskPublishedWidget(1, self.db, self.db.getLastTask()[0]))
 
 if __name__ =="__main__":
     app = QtWidgets.QApplication(sys.argv)
