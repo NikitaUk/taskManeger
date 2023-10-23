@@ -1,12 +1,12 @@
-from PyQt6.QtSql import QSqlDatabase, QSqlQuery, QSqlQueryModel
-from PyQt6 import QtCore
+from PyQt5.QtSql import QSqlDatabase, QSqlQuery, QSqlQueryModel
+from PyQt5 import QtCore
 
 class Database():
     def __init__(self):
         self.db = QSqlDatabase.addDatabase("QPSQL")
         self.db.setDatabaseName("task")
         self.db.setUserName("postgres")
-        self.db.setPassword("psw")
+        self.db.setPassword("student")
         self.db.setPort(5432)
         self.db.setHostName("localhost")
         self.query = QSqlQuery()
@@ -129,8 +129,3 @@ class Database():
         idUs = self.query.lastInsertId()
         self.query.clear()
         self.query.exec(f"INSERT INTO public.account (login, password, user_id) VALUES ('{login}', '{password}', '{idUs}')")
-
-
-if __name__ == "__main__":
-    db = Database()
-    print(db.getTasksStaff(4))
