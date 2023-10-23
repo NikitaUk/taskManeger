@@ -1,13 +1,13 @@
-from PyQt6 import QtCore, QtGui, QtWidgets
+from PyQt5 import QtCore, QtGui, QtWidgets
 import sys
 
 class AppendStaffWindow(QtWidgets.QWidget):
-    def __init__(self, db):
+    def __init__(self, db, rest):
         super().__init__()
-        self.setupUi()
+        self.setupUi(rest)
         self.db = db
 
-    def setupUi(self):
+    def setupUi(self, rest):
         self.setObjectName("Form")
         self.setFixedSize(461, 674)
         self.setStyleSheet("background-color: rgb(49, 51, 56);")
@@ -157,7 +157,7 @@ class AppendStaffWindow(QtWidgets.QWidget):
         self.password_lbl.setFont(font)
         self.password_lbl.setStyleSheet("color: rgb(222, 221, 218);")
         self.password_lbl.setObjectName("password_lbl")
-        self.enter_btn.clicked.connect(self.enter_clicked)
+        self.enter_btn.clicked.connect(lambda: self.enter_clicked(rest))
 
         self.retranslateUi()
         self.comboBox.setCurrentIndex(0)
@@ -184,13 +184,14 @@ class AppendStaffWindow(QtWidgets.QWidget):
         self.password_lineEdit.setText(_translate("Form", "Пароль"))
         self.password_lbl.setText(_translate("Form", "Пароль"))
 
-    def enter_clicked(self):
+    def enter_clicked(self, rest):
         role = 2
         if self.comboBox.currentIndex() == 0:
                 role = 1
         else:
                 role = 2
         self.db.appendStaff(self.name_lineEdit.text(), self.secondname_lineEdit.text(), self.thirdname_lineEdit.text(), self.position_lineEdit.text(), role, self.login_lineEdit.text(), self. password_lineEdit.text())
+        rest()
         self.close()
 
 if __name__ =="__main__":
