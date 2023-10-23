@@ -6,7 +6,7 @@ class Database():
         self.db = QSqlDatabase.addDatabase("QPSQL")
         self.db.setDatabaseName("task")
         self.db.setUserName("postgres")
-        self.db.setPassword("city")
+        self.db.setPassword("psw")
         self.db.setPort(5432)
         self.db.setHostName("localhost")
         self.query = QSqlQuery()
