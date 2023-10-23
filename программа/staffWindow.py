@@ -1,7 +1,7 @@
-from PyQt6 import QtCore, QtGui, QtWidgets
+from PyQt5 import QtCore, QtGui, QtWidgets
 import sys
 from appendStaffWindow import AppendStaffWindow
-from profile import ProfileWindow
+from profileWindow import ProfileWindow
 
 class StaffWindow(QtWidgets.QWidget):
     def __init__(self, db, user):
@@ -103,8 +103,11 @@ class StaffWindow(QtWidgets.QWidget):
         self.appendStaffWindow.show()
 
     def profile_btn_clicked(self):
-        self.profile = ProfileWindow(self.db, self.user)
+        self.profile = ProfileWindow(self.db, self.user, self.setParentUser)
         self.profile.show()
+
+    def setParentUser(self, childUs):
+        self.user = childUs
 
 if __name__ =="__main__":
     app = QtWidgets.QApplication(sys.argv)
