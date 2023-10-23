@@ -1,17 +1,17 @@
-from PyQt6 import QtCore, QtGui, QtWidgets
+from PyQt5 import QtCore, QtGui, QtWidgets
 import sys
 import datetime
 
 class AppendTaskWindow(QtWidgets.QWidget):
-    def __init__(self, db, guarantor):
+    def __init__(self, db, guarantor, lastTask):
         super().__init__()
         spisok = db.getStaffsNames()
         self.db = db
         self.guarantor = guarantor
         self.exspisok = []
-        self.setupUi(spisok)
+        self.setupUi(spisok, lastTask)
 
-    def setupUi(self, users):
+    def setupUi(self, users, lastTask):
         today = datetime.date.today()
         date = QtCore.QDate(today.year, today.month, today.day)
         self.setWindowModality(QtCore.Qt.WindowModality.ApplicationModal)
@@ -127,7 +127,7 @@ class AppendTaskWindow(QtWidgets.QWidget):
         self.pushButton_2.setStyleSheet("background-color: rgb(88, 101, 242);\n"
 "color: rgb(185, 185, 185);")
         self.pushButton_2.setObjectName("pushButton_2")
-        self.pushButton_2.clicked.connect(self.appendTask_clicked)
+        self.pushButton_2.clicked.connect(lambda: self.appendTask_clicked(lastTask))
         self.appendExecuter(users)
         self.retranslateUi()
         QtCore.QMetaObject.connectSlotsByName(self)
@@ -149,7 +149,7 @@ class AppendTaskWindow(QtWidgets.QWidget):
             self.exspisok.append(i['id'])
             self.comboBox.addItem(el)
 
-    def appendTask_clicked(self):
+    def appendTask_clicked(self, lastTask):
         if len(self.lineEdit.text().strip()) > 1:
             dateend = f"{str(self.dateTimeEdit_2.date().day())}.{str(self.dateTimeEdit_2.date().month())}.{str(self.dateTimeEdit_2.date().year())}"
             datestart = f"{str(self.dateTimeEdit_3.date().day())}.{str(self.dateTimeEdit_3.date().month())}.{str(self.dateTimeEdit_3.date().year())}"
@@ -161,6 +161,7 @@ class AppendTaskWindow(QtWidgets.QWidget):
                 "executor": self.exspisok[self.comboBox.currentIndex()]
                 }
             self.db.appendTask(name=taskkeys["name"], datestart=taskkeys["datestart"], dateend=taskkeys["dateend"], guarantor=taskkeys["guarantor"], executor=taskkeys["executor"])
+            lastTask()
             self.close()
 
 if __name__ =="__main__":
