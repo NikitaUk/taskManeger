@@ -99,7 +99,7 @@ class StaffWindow(QtWidgets.QWidget):
         self.tableView.setColumnWidth(0, 50)
 
     def append_btn_clicked(self):
-        self.appendStaffWindow = AppendStaffWindow(self.db)
+        self.appendStaffWindow = AppendStaffWindow(self.db, self.restartTable)
         self.appendStaffWindow.show()
 
     def profile_btn_clicked(self):
@@ -108,6 +108,9 @@ class StaffWindow(QtWidgets.QWidget):
 
     def setParentUser(self, childUs):
         self.user = childUs
+
+    def restartTable(self):
+        self.setStaffs(self.db)
 
 if __name__ =="__main__":
     app = QtWidgets.QApplication(sys.argv)
