@@ -129,3 +129,26 @@ class Database():
         idUs = self.query.lastInsertId()
         self.query.clear()
         self.query.exec(f"INSERT INTO public.account (login, password, user_id) VALUES ('{login}', '{password}', '{idUs}')")
+
+    def getLastTask(self):
+        self.query.clear()
+        self.query.exec(f"SELECT * FROM public.task ORDER BY id DESC LIMIT 1")
+        if self.query.first():
+            values = []
+            while True:
+                value = []
+                j = 0
+                while True:
+                    if self.query.isNull(j):
+                        values.append(value)
+                        break
+                    else:
+                        value.append(self.query.value(j))
+                        j += 1
+                if self.query.next():
+                    continue
+                else:
+                    break
+            return values
+        else:
+            return False
