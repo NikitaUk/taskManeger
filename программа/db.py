@@ -31,8 +31,8 @@ class Database():
                 "name": values[5],
                 "secondname": values[6],
                 "thirstname": values[7],
-                "pos": values[8],
-                "roleId": values[9],
+                #"pos": values[8],
+                "roleId": values[8]
             }
         else:
             return False
@@ -105,7 +105,8 @@ class Database():
 
     def getStaffs(self):
         query = QSqlQueryModel()
-        query.setQuery("SELECT public.user.id, public.user.name, secondname, thirstname, position, role.name FROM public.user INNER JOIN public.role ON public.user.role_id = role.id")
+        # query.setQuery("SELECT public.user.id, public.user.name, secondname, thirstname, position, role.name FROM public.user INNER JOIN public.role ON public.user.role_id = role.id")
+        query.setQuery("SELECT public.user.id, public.user.name, secondname, thirstname, role.name FROM public.user INNER JOIN public.role ON public.user.role_id = role.id")
         query.setHeaderData(0, QtCore.Qt.Orientation.Horizontal, "№")
         query.setHeaderData(1, QtCore.Qt.Orientation.Horizontal, "Имя")
         query.setHeaderData(2, QtCore.Qt.Orientation.Horizontal, "Фамилия")
@@ -125,7 +126,8 @@ class Database():
 
     def appendStaff(self, name, sname, tname, pos, role, login, password):
         self.query.clear()
-        self.query.exec(f"INSERT INTO public.user (name, secondname, thirstname, position, role_id) VALUES ('{name}', '{sname}', '{tname}', '{pos}', '{role}')")
+        #pself.query.exec(f"INSERT INTO public.user (name, secondname, thirstname, position, role_id) VALUES ('{name}', '{sname}', '{tname}', '{pos}', '{role}')")
+        self.query.exec(f"INSERT INTO public.user (name, secondname, thirstname, role_id) VALUES ('{name}', '{sname}', '{tname}', '{role}')")
         idUs = self.query.lastInsertId()
         self.query.clear()
         self.query.exec(f"INSERT INTO public.account (login, password, user_id) VALUES ('{login}', '{password}', '{idUs}')")
