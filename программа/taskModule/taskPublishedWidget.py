@@ -1,4 +1,4 @@
-from PyQt6 import QtCore, QtGui, QtWidgets
+from PyQt5 import QtCore, QtGui, QtWidgets
 import sys
 import datetime
 
@@ -19,6 +19,11 @@ class TaskPublishedWidget(QtWidgets.QWidget):
         self.setupUi()
 
     def setupUi(self):
+        today = datetime.date.today()
+        if QtCore.QDate(today).daysTo(self.date_end) < 0:
+            self.term = False
+        else:
+            self.term = True
         self.setObjectName("taskWidget")
         self.setFixedSize(661, 61)
         self.setStyleSheet("background-color: rgb(49, 51, 56);")
@@ -61,7 +66,10 @@ class TaskPublishedWidget(QtWidgets.QWidget):
         self.indicator_lbl = QtWidgets.QLabel(parent=self)
         self.indicator_lbl.setGeometry(QtCore.QRect(0, 0, 31, 61))
         self.indicator_lbl.setLayoutDirection(QtCore.Qt.LayoutDirection.LeftToRight)
-        self.indicator_lbl.setStyleSheet("background-color: rgb(170, 255, 255);")
+        if self.term == False:
+            self.indicator_lbl.setStyleSheet("background-color: #921717;")
+        else:
+            self.indicator_lbl.setStyleSheet("background-color: rgb(170, 255, 255);")
         self.indicator_lbl.setText("")
         self.indicator_lbl.setAlignment(QtCore.Qt.AlignmentFlag.AlignCenter)
         self.indicator_lbl.setObjectName("indicator_lbl")
