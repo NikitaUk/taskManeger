@@ -167,10 +167,10 @@ class AppendStaffWindow(QtWidgets.QWidget):
         _translate = QtCore.QCoreApplication.translate
         self.setWindowTitle(_translate("Form", "Добавить сотрудника"))
         self.enter_btn.setText(_translate("Form", "Добавить"))
-        self.position_lineEdit.setText(_translate("Form", "Должность"))
+        #self.position_lineEdit.setText(_translate("Form", "Должность"))
         self.role_lbl.setText(_translate("Form", "Роль"))
         self.secondname_lbl.setText(_translate("Form", "Фамилия"))
-        self.position_lbl.setText(_translate("Form", "Должность"))
+        #self.position_lbl.setText(_translate("Form", "Должность"))
         self.title_lbl.setText(_translate("Form", "Добавить сотрудника"))
         self.secondname_lineEdit.setText(_translate("Form", "Фамилия"))
         self.name_lineEdit.setText(_translate("Form", "Имя"))
@@ -190,7 +190,8 @@ class AppendStaffWindow(QtWidgets.QWidget):
                 role = 1
         else:
                 role = 2
-        self.db.appendStaff(self.name_lineEdit.text(), self.secondname_lineEdit.text(), self.thirdname_lineEdit.text(), self.position_lineEdit.text(), role, self.login_lineEdit.text(), self. password_lineEdit.text())
+        #self.db.appendStaff(self.name_lineEdit.text(), self.secondname_lineEdit.text(), self.thirdname_lineEdit.text(), self.position_lineEdit.text(), role, self.login_lineEdit.text(), self. password_lineEdit.text())
+        self.db.appendStaff(self.name_lineEdit.text(), self.secondname_lineEdit.text(), self.thirdname_lineEdit.text(), role, self.login_lineEdit.text(), self. password_lineEdit.text())
         rest()
         self.close()
 
