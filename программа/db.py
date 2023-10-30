@@ -124,7 +124,7 @@ class Database():
     def closeDb(self):
         self.db.close()
 
-    def appendStaff(self, name, sname, tname, pos, role, login, password):
+    def appendStaff(self, name, sname, tname, role, login, password):
         self.query.clear()
         #pself.query.exec(f"INSERT INTO public.user (name, secondname, thirstname, position, role_id) VALUES ('{name}', '{sname}', '{tname}', '{pos}', '{role}')")
         self.query.exec(f"INSERT INTO public.user (name, secondname, thirstname, role_id) VALUES ('{name}', '{sname}', '{tname}', '{role}')")
