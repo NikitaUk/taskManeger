@@ -130,7 +130,8 @@ class ProfileWindow(QtWidgets.QWidget):
 
     def enterBtn_clicked(self, setParentUser):
         self.db.updateUser(self.user['idUser'], self.user['idAc'], self.name_lineEdit.text(), self.secondname_lineEdit.text(), self.thirdname_lineEdit.text(), self.login_lineEdit.text(), self.password_lineEdit.text())
-        newUs = {"idAc": self.user['idAc'], "login": self.login_lineEdit.text(), "password": self.password_lineEdit.text(), "idUser": self.user["idUser"], "name": self.name_lineEdit.text(), "secondname": self.secondname_lineEdit.text(), "thirstname": self.thirdname_lineEdit.text(), "pos": self.user["pos"], "roleId": self.user["roleId"]}
+        #newUs = {"idAc": self.user['idAc'], "login": self.login_lineEdit.text(), "password": self.password_lineEdit.text(), "idUser": self.user["idUser"], "name": self.name_lineEdit.text(), "secondname": self.secondname_lineEdit.text(), "thirstname": self.thirdname_lineEdit.text(), "pos": self.user["pos"], "roleId": self.user["roleId"]}
+        newUs = {"idAc": self.user['idAc'], "login": self.login_lineEdit.text(), "password": self.password_lineEdit.text(), "idUser": self.user["idUser"], "name": self.name_lineEdit.text(), "secondname": self.secondname_lineEdit.text(), "thirstname": self.thirdname_lineEdit.text(), "roleId": self.user["roleId"]}
         setParentUser(newUs) 
         self.close()
 
