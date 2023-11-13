@@ -82,7 +82,7 @@ class Database():
 
     def getStaffsNames(self):
         self.query.clear()
-        self.query.exec(f"SELECT id, name, secondname, thirstname FROM public.user")
+        self.query.exec(f"SELECT id, name, secondname, thirstname FROM public.user WHERE role_id='2'")
         if self.query.first():
             value = []
             while True:
